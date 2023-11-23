@@ -1,5 +1,6 @@
 class Calculator {
 
+
     constructor(screenNumber1, screenNumber2) {
         this.screenNumber1 = screenNumber1;
         this.screenNumber2 = screenNumber2;
