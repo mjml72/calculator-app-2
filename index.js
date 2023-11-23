@@ -1,102 +1,109 @@
 class Calculator {
 
-    constructor(firstNumber, secondNumber, operation){
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
-        this.operation = operation;
+    constructor(screenNumber1, screenNumber2) {
+        this.screenNumber1 = screenNumber1;
+        this.screenNumber2 = screenNumber2;
+        this.operator = "";
+        this.number1 = 0;
+        this.number2 = 0;
     }
-    
-    calculate(){
 
-        let first = parseFloat(this.firstNumber);
-        let second = parseFloat(this.secondNumber);
-        let result = 0;
+    calculate() {
+        this.number1 = parseFloat(this.number1);
+        this.number2 = parseFloat(this.number2);
 
-        switch(this.operation){
+        switch (this.operator) {
             case "+":
-                result =  first + second;
+                this.number1 = this.number1 + this.number2;
                 break;
             case "-":
-                result =  first - second;
+                this.number1 = this.number1 - this.number2;
                 break;
             case "*":
-                result =  first * second;
+                this.number1 = this.number1 * this.number2;
                 break;
             case "/":
-                result =  first / second;
+                this.number1 = this.number1 / this.number2;
                 break;
             default:
         }
-        
-        return result;
+        this.number1 = this.number1.toFixed(5);
+        this.operator = "";
+        this.number2 = 0;
+        this.updateUI();
+    }
+
+    appendNumber(number) {
+        if (number === "." && this.number2.toString().includes(".")) { return; }
+        this.number2 = this.number2 === 0 && number !== "." ? number :
+            this.number2.toString() + number;
+        this.updateUI();
+    }
+
+    updateUI() {
+        this.screenNumber1.innerText = this.number1.toString() + this.operator;
+        this.screenNumber2.innerText = this.number2.toString();
+    }
+
+    clear() {
+        this.number1 = 0;
+        this.number2 = 0;
+        this.operator = "";
+        this.updateUI();
+    }
+
+    getOperator(operator) {
+        if (this.operator) {
+            this.calculate();
+        }
+        this.operator = operator;
+        this.number1 = this.number2 === 0 ? this.number1 : this.number2;
+        this.number2 = 0;
+        this.updateUI();
 
     }
 
+    delete() {
+        if (this.number2 === 0) { return; }
+        this.number2 = this.number2.toString().slice(0, -1);
+        if (this.number2.toString().length === 0) { this.number2 = 0; }
+        this.updateUI();
+    }
 }
 
-const calculator = new Calculator("", "", "");
 
-const screenNumber = document.getElementById("screen-number");
+const screenNumber1 = document.getElementById("screen-number1");
+const screenNumber2 = document.getElementById("screen-number2");
 const numbers = document.getElementsByClassName("number");
-const c = document.getElementById("c");
+const clearButton = document.getElementById("c");
 const mathOperations = document.getElementsByClassName("operation");
-const equal = document.getElementById("equal");
+const equalButton = document.getElementById("equal");
+const deleteButton = document.getElementById("delete");
 
-let screen = "", point = false;
+const calculator = new Calculator(screenNumber1, screenNumber2);
+
 for (let i = 0; i < numbers.length; i++) {
+    numbers[i].addEventListener("click", () => {
+        calculator.appendNumber(numbers[i].innerText);
+    });
 
-    numbers[i].addEventListener("click", function(){
-        if(numbers[i].textContent === "." && point === false){
-            point = true;
-        }else if(numbers[i].textContent === "." && point === true){
-            return;
-        }
-        screen += numbers[i].textContent;
-        screenNumber.innerText = screen;
-        
-    })
-    
 }
 
 for (let i = 0; i < mathOperations.length; i++) {
-
-        mathOperations[i].addEventListener("click", function(){
-            calculator.firstNumber = screenNumber.textContent;
-            calculator.operation = mathOperations[i].textContent;
-            calculator.secondNumber = "";
-            point = false;
-            screen = ""; 
-        })
+    mathOperations[i].addEventListener("click", () => {
+        calculator.getOperator(mathOperations[i].innerText);
+    });
 }
 
-equal.addEventListener("click", function(){
-
-    if(calculator.secondNumber === ""){
-        calculator.secondNumber = screenNumber.textContent;
-    }
-
-    getResult();
-
+equalButton.addEventListener("click", function () {
+    calculator.calculate();
 })
 
-function getResult() {
+deleteButton.addEventListener("click", () => {
+    calculator.delete();
+});
 
-    let result = calculator.calculate();
-    screenNumber.innerText = result;
-    calculator.firstNumber = result;
-    point = false;
-}
-
-
-c.addEventListener("click", function(){
-
-    screenNumber.innerText = "0";
-    calculator.firstNumber = "";
-    calculator.secondNumber = "";
-    calculator.operation = "";
-    calculator.result = 0;
-    point = false;
-    screen = "";
-
+clearButton.addEventListener("click", () => {
+    calculator.clear();
 })
 

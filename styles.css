@@ -16,51 +16,61 @@ body {
 }
 
 
-.container {
-    background-color: rgb(255, 232, 232);
-    border-radius: 10px;
-    padding: 1rem;
+.calculator {
+    background-color: rgb(98, 92, 92);
+    box-shadow: 0px 0px 5px 10px black;
+    width: 320px;
+    border-radius: 5px;
+    padding: 20px;
+
 }
 
 
 .screen {
-    background-color: rgb(245, 195, 133);
-    padding: 1em;
-    margin: 0.5rem;
-    border-radius: 10px;
-}
-
-
-
-.screen h1 {
+    background-color: rgb(205, 207, 165);
+    width: 100%;
     text-align: right;
-    font-size: 3rem;
+    padding: 1em;
+    border-radius: 5px;
 }
+
+#screen-number1 {
+    font-size: 30px;
+}
+#screen-number2 {
+    font-size: 40px;
+}
+
 
 .buttons {
-    margin-top: 2rem;
+    margin-top: 30px;
+    min-height: 300px;
 }
 
 .btnRow {
-    margin: 0.5rem;
+    width: 100%;
+    margin-top: 5px;
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-between;
+    height: 50px;
 }
 
 .btn {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 1.5rem;
-    width: 70px;
-    height: 70px;
-    border: none;
-    border-radius: 10px;
+    min-width: 22%;
+    border-width: 5px;
+    border-radius: 5px;
     background-color: rgb(226, 210, 210);
     cursor: pointer;
 }
 
+.double {
+    min-width: 48%;
+}
 
-.btn:active{
+.btn:active {
     background-color: rgb(186, 172, 172);
 }
 
@@ -76,7 +86,3 @@ body {
 .operation {
     color: green;
 }
-
-
-
-
