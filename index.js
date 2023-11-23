@@ -27,7 +27,8 @@ class Calculator {
                 break;
             default:
         }
-        this.number1 = this.number1.toFixed(5);
+
+       
         this.operator = "";
         this.number2 = 0;
         this.updateUI();
@@ -76,7 +77,7 @@ const screenNumber1 = document.getElementById("screen-number1");
 const screenNumber2 = document.getElementById("screen-number2");
 const numbers = document.getElementsByClassName("number");
 const clearButton = document.getElementById("c");
-const mathOperations = document.getElementsByClassName("operation");
+const mathOperations = document.getElementsByClassName("operator");
 const equalButton = document.getElementById("equal");
 const deleteButton = document.getElementById("delete");
 

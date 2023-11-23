@@ -19,7 +19,7 @@ body {
 .calculator {
     background-color: rgb(98, 92, 92);
     box-shadow: 0px 0px 5px 10px black;
-    width: 320px;
+    min-width: 320px;
     border-radius: 5px;
     padding: 20px;
 
@@ -34,6 +34,7 @@ body {
     border-radius: 5px;
 }
 
+
 #screen-number1 {
     font-size: 30px;
 }
@@ -45,6 +46,7 @@ body {
 .buttons {
     margin-top: 30px;
     min-height: 300px;
+    margin: 0 auto;
 }
 
 .btnRow {
@@ -83,6 +85,5 @@ body {
     color: brown;
 }
 
-.operation {
-    color: green;
+@media screen and (max-width: 500px) {
 }
